@@ -3,6 +3,8 @@ package com.adioevo.daw.project.di
 import android.content.Context
 import androidx.room.Room
 import com.adioevo.daw.project.database.AppDatabase
+import com.adioevo.daw.project.database.ProjectDao
+import com.adioevo.daw.project.database.TrackDao
 import com.adioevo.daw.soundfont.database.SoundFontDao
 import dagger.Module
 import dagger.Provides
@@ -22,6 +24,18 @@ object DatabaseModule {
             AppDatabase::class.java,
             "adioevo_database"
         ).build()
+    }
+    
+    @Provides
+    @Singleton
+    fun provideProjectDao(database: AppDatabase): ProjectDao {
+        return database.projectDao()
+    }
+    
+    @Provides
+    @Singleton
+    fun provideTrackDao(database: AppDatabase): TrackDao {
+        return database.trackDao()
     }
     
     @Provides
